@@ -18,7 +18,8 @@ const Notes = () => {
   const [note, setNote] = useState('')
   const [notesList, setNotesList] = useState([])
 
-  const handleAddNote = () => {
+  const handleAddNote = event => {
+    event.preventDefault()
     if (title.trim() !== '' && note.trim() !== '') {
       const newNote = {
         id: Math.random().toString(),
@@ -48,18 +49,20 @@ const Notes = () => {
           ))}
         </NotesList>
       )}
-      <Input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
-      <TextArea
-        placeholder="Take a Note..."
-        value={note}
-        onChange={e => setNote(e.target.value)}
-      />
-      <AddButton onClick={handleAddNote}>Add</AddButton>
+      <form onSubmit={handleAddNote}>
+        <Input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+        <TextArea
+          placeholder="Take a Note..."
+          value={note}
+          onChange={e => setNote(e.target.value)}
+        />
+        <AddButton type="submit">Add</AddButton>
+      </form>
     </Container>
   )
 }
